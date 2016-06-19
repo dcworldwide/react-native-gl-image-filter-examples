@@ -1,6 +1,7 @@
 package com.imageglshaders;
 
 import com.facebook.react.ReactActivity;
+import com.rnfs.RNFSPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.projectseptember.RNGL.RNGLPackage;
@@ -36,6 +37,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNFSPackage(),
             new RNGLPackage()
         );
     }
