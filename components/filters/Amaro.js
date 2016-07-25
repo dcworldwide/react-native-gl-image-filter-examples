@@ -38,7 +38,7 @@ const shaders = GL.Shaders.create({
 });
 
 module.exports = GL.createComponent(
-  ({ children: inputImageTexture }) => {
+  ({ inputImageTexture }) => {
     return <GL.Node
       shader={shaders.Amaro}
       uniforms={{ 

@@ -28,10 +28,7 @@ const filters = [
         name: 'Amaro',
         component: Amaro,
         props: {
-            inputImageTexture2: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/blackboard1024.png',
-            inputImageTexture3: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/overlayMap.png',
-            inputImageTexture4: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/amaroMap.png',
-        },
+            },
     },
     {
         name: 'Brannan',
@@ -83,9 +80,9 @@ class imageGlShaders extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            activeFilter: "Valencia",
-            imageUrl: "https://s3.amazonaws.com/mira/uploads/-KKDzQqGeuMJ-FgKktKR", //https://s3.amazonaws.com/mira/uploads/-KKDzg7lecfWQR8uiILx", //"http://i.imgur.com/iPKTONG.jpg"
-            imageSize: {width: 1920, height: 1920}
+            activeFilter: "Amaro",
+            imageUrl: "http://lorempixel.com/output/nature-q-c-600-480-2.jpg", //"https://s3.amazonaws.com/mira/uploads/-KKDzQqGeuMJ-FgKktKR", //https://s3.amazonaws.com/mira/uploads/-KKDzg7lecfWQR8uiILx", //"http://i.imgur.com/iPKTONG.jpg"
+            imageSize: {width: 600, height: 480} //{width: 1920, height: 1920}
         }
     }
 
@@ -122,11 +119,7 @@ class imageGlShaders extends Component {
             />
         } else if (this.state.activeFilter == "Amaro") {
             return <Amaro
-                inputImageTexture={image}
-                inputImageTexture='https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/blackboard1024.png'
-                inputImageTexture3='https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/overlayMap.png'
-                inputImageTexture4='https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/amaroMap.png'
-            />
+                inputImageTexture={image} />
         } else if (this.state.activeFilter == "Brannan") {
             return <Brannan
                 inputImageTexture={image}
