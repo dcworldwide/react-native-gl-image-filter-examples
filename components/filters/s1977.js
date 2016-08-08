@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import GL from "gl-react"
 
+const resolveAssetSource = require("react-native/Libraries/Image/resolveAssetSource");
+const inputImageTexture2 = resolveAssetSource(require('../../assets/filters/1977map.png'))
+
 const shaders = GL.Shaders.create({
   s1977: {
     frag: `
@@ -25,11 +28,14 @@ const shaders = GL.Shaders.create({
 });
 
 export default GL.createComponent(
-  ({ inputImageTexture, inputImageTexture2, ...rest }) =>
+  ({ inputImageTexture, ...rest }) =>
     <GL.Node
       {...rest}
       shader={shaders.s1977}
-      uniforms={{ inputImageTexture, inputImageTexture2 }}
+      uniforms={{ 
+        inputImageTexture, 
+        inputImageTexture2 
+    }}
     />,
   { displayName: "s1977" }
 );

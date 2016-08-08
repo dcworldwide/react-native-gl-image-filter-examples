@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import GL from "gl-react"
 
 // Washed out colour with gradient
 // Inspiration: https://github.com/danielgindi/Instagram-Filters/blob/master/InstaFilters/Resources_for_FiltersViewController/DSFilterTileHudson%402x.png
 
+const resolveAssetSource = require("react-native/Libraries/Image/resolveAssetSource");
+const inputImageTexture2 = resolveAssetSource(require('../../assets/filters/brannanBlowout.png'))
+const inputImageTexture3 = resolveAssetSource(require('../../assets/filters/hudsonBackground.png'))
+const inputImageTexture4 = resolveAssetSource(require('../../assets/filters/hudsonMap.png'))
+
 const shaders = GL.Shaders.create({
-  hudson: {
-    frag: `
+    hudson: {
+        frag: `
       precision lowp float;
       varying highp vec2 uv;
 
@@ -52,7 +57,7 @@ const shaders = GL.Shaders.create({
           // gl_FragColor = vec4(texel.rgb, 1.0);
       }
     `
-  }
+    }
 });
 
 /*
@@ -73,14 +78,19 @@ const shaders = GL.Shaders.create({
  mapped.a = 1.0;
  gl_FragColor = mapped;
 
-*/
+ */
 
 export default GL.createComponent(
-  ({ inputImageTexture, inputImageTexture2, inputImageTexture3, inputImageTexture4, ...rest }) =>
-    <GL.Node
-      {...rest}
-      shader={shaders.hudson}
-      uniforms={{ inputImageTexture, inputImageTexture2, inputImageTexture3, inputImageTexture4 }}
-    />,
-  { displayName: "hudson" }
+    ({inputImageTexture, ...rest}) =>
+        <GL.Node
+            {...rest}
+            shader={shaders.hudson}
+            uniforms={{
+                inputImageTexture,
+                inputImageTexture2,
+                inputImageTexture3,
+                inputImageTexture4
+            }}
+        />,
+    {displayName: "hudson"}
 );

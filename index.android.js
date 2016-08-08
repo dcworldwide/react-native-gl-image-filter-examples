@@ -13,7 +13,7 @@ import {
 import RNFS from 'react-native-fs'
 import {Surface} from "gl-react-native"
 const {Image: GLImage} = require("gl-react-image")
-
+// import {ImageFilter} from "gl-react-imagefilter";
 import Saturate from './components/filters/saturate'
 import S1977 from './components/filters/s1977'
 import Hudson from './components/filters/hudson'
@@ -27,8 +27,7 @@ const filters = [
     {
         name: 'Amaro',
         component: Amaro,
-        props: {
-            },
+        props: {},
     },
     {
         name: 'Brannan',
@@ -38,40 +37,29 @@ const filters = [
     {
         name: 'Hudson',
         component: Hudson,
-        props: {
-            inputImageTexture2: "https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/brannanBlowout.png",
-            inputImageTexture3: "https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/hudsonBackground.png",
-            inputImageTexture4: "https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/hudsonMap.png"
-        }
+        props: {}
     },
     {
         name: 'Saturate',
         component: Saturate,
         props: {
-            factor: 0.7
+            factor: 0.9
         }
     },
     {
         name: 'S1977',
         component: S1977,
-        props: {
-            inputImageTexture2: "https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/1977map.png"
-        }
+        props: {}
     },
     {
         name: 'Inkwell',
         component: Inkwell,
-        props: {
-            inputImageTexture2: "https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/inkwellMap.png"
-        }
+        props: {}
     },
     {
         name: 'Valencia',
         component: Valencia,
-        props: {
-            inputImageTexture2: "https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/valenciaMap.png",
-            inputImageTexture3: "https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/valenciaGradientMap.png"
-        }
+        props: {}
     }
 ]
 
@@ -114,8 +102,6 @@ class imageGlShaders extends Component {
         if (this.state.activeFilter == "Valencia") {
             return <Valencia
                 inputImageTexture={image}
-                inputImageTexture2="https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/valenciaMap.png"
-                inputImageTexture3="https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/valenciaGradientMap.png"
             />
         } else if (this.state.activeFilter == "Amaro") {
             return <Amaro
@@ -127,19 +113,14 @@ class imageGlShaders extends Component {
         } else if (this.state.activeFilter == "Hudson") {
             return <Hudson
                 inputImageTexture={image}
-                inputImageTexture2="https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/brannanBlowout.png"
-                inputImageTexture3="https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/hudsonBackground.png"
-                inputImageTexture4="https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/hudsonMap.png"
             />
         } else if (this.state.activeFilter == "S1977") {
             return <S1977
                 inputImageTexture={image}
-                inputImageTexture2="https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/1977map.png"
-            />
+                />
         } else if (this.state.activeFilter == "Inkwell") {
             return <Inkwell
                 inputImageTexture={image}
-                inputImageTexture2="https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_IF_Filters/inkwellMap.png"
             />
         } else if (this.state.activeFilter == "Saturate") {
             return <Saturate
@@ -150,6 +131,15 @@ class imageGlShaders extends Component {
             throw "Unsupported filter"
         }
     }
+
+// <Surface width={Dimensions.get('window').width} height={200}>
+// <ImageFilter sepia={3} blur={2}>
+// <GLImage
+// source="https://unsplash.it/200/300"
+// imageSize={{ width: 300, height: 200 }}
+// resizeMode="cover" />
+// </ImageFilter>
+// </Surface>
 
     render() {
 
@@ -177,8 +167,9 @@ class imageGlShaders extends Component {
 
                         return <TouchableOpacity
                             key={f.name}
-                            style={{padding: 1}}
+                            style={{flex: 1, padding: 1}}
                             onPress={this.onFilterSelected.bind(this, f.name)}>
+                            <Text>{f.name}</Text>
                             <Surface width={120} height={120}>
                                 <f.component
                                     inputImageTexture={image}

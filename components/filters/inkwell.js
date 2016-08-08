@@ -4,6 +4,10 @@ import GL from "gl-react"
 // A b&w shader with a gradient overlay.
 // Inspiration: https://raw.githubusercontent.com/danielgindi/Instagram-Filters/master/InstaFilters/Resources_for_FiltersViewController/DSFilterTileInkwell%402x.png
 
+const resolveAssetSource = require("react-native/Libraries/Image/resolveAssetSource");
+const inputImageTexture2 = resolveAssetSource(require('../../assets/filters/inkwellMap.png'))
+
+
 const shaders = GL.Shaders.create({
   inkwell: {
     frag: `
@@ -72,7 +76,7 @@ const shaders = GL.Shaders.create({
 
 
 export default GL.createComponent(
-  ({ inputImageTexture, inputImageTexture2, ...rest }) =>
+  ({ inputImageTexture, ...rest }) =>
     <GL.Node
       shader={shaders.inkwell}
       uniforms={{ inputImageTexture, inputImageTexture2 }}

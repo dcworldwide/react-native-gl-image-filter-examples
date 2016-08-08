@@ -5,6 +5,12 @@ const {
   PropTypes
 } = React;
 
+const resolveAssetSource = require("react-native/Libraries/Image/resolveAssetSource");
+const inputImageTexture2 = resolveAssetSource(require('../../assets/filters/blackboard1024.png'))
+const inputImageTexture3 = resolveAssetSource(require('../../assets/filters/overlayMap.png'))
+const inputImageTexture4 = resolveAssetSource(require('../../assets/filters/amaroMap.png'))
+
+
 const shaders = GL.Shaders.create({
   Amaro: {
     frag: `
@@ -43,9 +49,9 @@ module.exports = GL.createComponent(
       shader={shaders.Amaro}
       uniforms={{ 
         inputImageTexture,
-        inputImageTexture2: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/blackboard1024.png',
-        inputImageTexture3: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/overlayMap.png',
-        inputImageTexture4: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/amaroMap.png',
+        inputImageTexture2: inputImageTexture2,
+        inputImageTexture3: inputImageTexture3,
+        inputImageTexture4: inputImageTexture4
       }}
     />
   },

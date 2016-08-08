@@ -1,6 +1,13 @@
 import GL from 'gl-react'
 import React,{PropTypes} from 'react'
 
+const resolveAssetSource = require("react-native/Libraries/Image/resolveAssetSource");
+const inputImageTexture2 = resolveAssetSource(require('../../assets/filters/brannanProcess.png'))
+const inputImageTexture3 = resolveAssetSource(require('../../assets/filters/brannanBlowout.png'))
+const inputImageTexture4 = resolveAssetSource(require('../../assets/filters/brannanContrast.png'))
+const inputImageTexture5 = resolveAssetSource(require('../../assets/filters/brannanLuma.png'))
+const inputImageTexture6 = resolveAssetSource(require('../../assets/filters/brannanScreen.png'))
+
 const shaders = GL.Shaders.create({
   Brannan: {
     frag: `
@@ -86,12 +93,12 @@ module.exports = GL.createComponent(
       shader={shaders.Brannan}
       uniforms={{ 
         inputImageTexture,
-        inputImageTexture2: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/brannanProcess.png',
-        inputImageTexture3: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/brannanBlowout.png',
-        inputImageTexture4: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/brannanContrast.png',
-        inputImageTexture5: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/brannanLuma.png',
-        inputImageTexture6: 'https://raw.githubusercontent.com/stoffern/gl-react-instagramfilters/master/resources/brannanScreen.png'
-      }}
+        inputImageTexture2,
+        inputImageTexture3,
+        inputImageTexture4,
+        inputImageTexture5,
+        inputImageTexture6,
+        }}
     />
   },
   {

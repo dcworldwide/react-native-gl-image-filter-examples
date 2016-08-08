@@ -4,6 +4,10 @@ import GL from "gl-react"
 // Cold colour, with center light and curved gradient border
 // Inspiration: https://github.com/danielgindi/Instagram-Filters/blob/master/InstaFilters/Resources_for_FiltersViewController/DSFilterTileValencia%402x.png
 
+const resolveAssetSource = require("react-native/Libraries/Image/resolveAssetSource");
+const inputImageTexture2 = resolveAssetSource(require('../../assets/filters/valenciaMap.png'))
+const inputImageTexture3 = resolveAssetSource(require('../../assets/filters/valenciaGradientMap.png'))
+
 const shaders = GL.Shaders.create({
   valencia: {
     frag: `
@@ -74,11 +78,15 @@ gl_FragColor = vec4(texel, 1.0);
 */
 
 export default GL.createComponent(
-  ({ inputImageTexture, inputImageTexture2, inputImageTexture3, ...rest }) =>
+  ({ inputImageTexture, ...rest }) =>
     <GL.Node
       {...rest}
       shader={shaders.valencia}
-      uniforms={{ inputImageTexture, inputImageTexture2, inputImageTexture3 }}
+      uniforms={{
+          inputImageTexture,
+          inputImageTexture2,
+          inputImageTexture3
+      }}
     />,
   { displayName: "valencia" }
 );
